@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Beauty Shelf 💗</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>My Beauty Shelf 💗</h1>
+        <p>จัดการสกินแคร์และเครื่องสำอางของฉัน</p>
+    </header>
+
+    <main class="container">
+
+        <!-- สถิติ -->
+        <section class="stats">
+
+            <div class="stat-card">
+                <span>🧴</span>
+                <div>
+                    <p>สินค้าทั้งหมด</p>
+                    <h2 id="totalProducts">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span>✨</span>
+                <div>
+                    <p>Skincare</p>
+                    <h2 id="skincareCount">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span>💄</span>
+                <div>
+                    <p>Makeup</p>
+                    <h2 id="makeupCount">0</h2>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- เพิ่มสินค้า -->
+        <section class="form-section">
+
+            <h2>เพิ่มสินค้าใหม่ ✨</h2>
+            <p>เพิ่มสกินแคร์หรือเครื่องสำอางลงใน Beauty Shelf</p>
+
+            <form id="productForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>ชื่อสินค้า</label>
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="เช่น Vitamin C Serum"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>แบรนด์</label>
+                        <input
+                            type="text"
+                            id="brand"
+                            placeholder="เช่น Example Brand"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>ประเภท</label>
+
+                        <select id="category" required>
+                            <option value="">เลือกประเภท</option>
+                            <option value="skincare">Skincare</option>
+                            <option value="makeup">Makeup</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ชนิดสินค้า</label>
+
+                        <input
+                            type="text"
+                            id="type"
+                            placeholder="เช่น serum, lip, blush"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>ราคา (บาท)</label>
+
+                        <input
+                            type="number"
+                            id="price"
+                            placeholder="299"
+                            min="0"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>สถานะ</label>
+
+                        <select id="status" required>
+                            <option value="">เลือกสถานะ</option>
+                            <option value="using">กำลังใช้</option>
+                            <option value="unused">ยังไม่ได้ใช้</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    ＋ เพิ่มสินค้า
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- รายการสินค้า -->
+        <section class="products-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Beauty Shelf 🛍️</h2>
+                    <p>รายการสินค้าในคอลเลกชันของฉัน</p>
+                </div>
+
+                <div class="filter-buttons">
+
+                    <button
+                        class="filter-btn active"
+                        data-category="all"
+                    >
+                        ทั้งหมด
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-category="skincare"
+                    >
+                        🧴 Skincare
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-category="makeup"
+                    >
+                        💄 Makeup
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ค้นหา -->
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="🔍 ค้นหาชื่อสินค้า หรือแบรนด์..."
+                >
+
+            </div>
+
+
+            <!-- สินค้าจะแสดงตรงนี้ -->
+            <div
+                id="productList"
+                class="product-grid"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- หน้าต่างแก้ไขสินค้า -->
+
+    <div
+        id="editModal"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+            <button
+                id="closeModal"
+                class="close-btn"
+            >
+                ×
+            </button>
+
+            <h2>แก้ไขสินค้า ✏️</h2>
+
+            <form id="editForm">
+
+                <input
+                    type="hidden"
+                    id="editId"
+                >
+
+                <div class="form-group">
+                    <label>ชื่อสินค้า</label>
+
+                    <input
+                        type="text"
+                        id="editName"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>แบรนด์</label>
+
+                    <input
+                        type="text"
+                        id="editBrand"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>ประเภท</label>
+
+                    <select id="editCategory" required>
+                        <option value="skincare">
+                            Skincare
+                        </option>
+
+                        <option value="makeup">
+                            Makeup
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>ชนิดสินค้า</label>
+
+                    <input
+                        type="text"
+                        id="editType"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>ราคา</label>
+
+                    <input
+                        type="number"
+                        id="editPrice"
+                        min="0"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>สถานะ</label>
+
+                    <select id="editStatus" required>
+                        <option value="using">
+                            กำลังใช้
+                        </option>
+
+                        <option value="unused">
+                            ยังไม่ได้ใช้
+                        </option>
+                    </select>
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    บันทึกการแก้ไข
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

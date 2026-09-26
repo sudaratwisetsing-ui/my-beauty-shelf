@@ -1,0 +1,19 @@
+{
+  "name": "my-beauty-shelf",
+  "version": "1.0.0",
+  "description": "My Beauty Shelf - Skincare and Makeup Management Web App",
+  "main": "server/server.js",
+  "scripts": {
+    "dev": "nodemon server/server.js",
+    "start": "node server/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
